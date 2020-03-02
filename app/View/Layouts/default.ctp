@@ -23,7 +23,9 @@
 	<div id="container">
 	
 		<div id="header" class="page-header">		
-			<h1 id="titulo" class="bg-primary"><img src="/img/logo_dirnic.png" alt="observatorio" style="width: 70px;"><?php echo 'DIRNIC'; ?></h1>
+			<h1 id="titulo" class="bg-primary">
+			<?php echo $this->Html->image('logo_dirnic.png',array('alt'=>'dirnic','width' => '70px')); ?>DIRNIC
+        	</h1>        	     	
 			<?php echo $this->element('logeado'); ?>
 		</div>
 		
