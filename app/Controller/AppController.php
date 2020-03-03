@@ -58,8 +58,29 @@ class AppController extends Controller {
 	public $a_estados;
     function beforeFilter(){
         $this->paginate = array('limit'=>20);
-		$this->a_estados = array('A'=>'Activo','D'=>'Desactivo');
+        $this->a_destino_unidad = array('DIRNIC'=>'DIRNIC','DIRANDRO'=>'DIRANDRO','DIRINCRI'=>'DIRINCRI','DIRCOTE'=>'DIRCOTE','DIRCOCOR'=>'DIRCOCOR','DIRPOFIS'=>'DIRPOFIS','DIRMEAMB'=>'DIRMEAMB','DIRCTPTIM'=>'DIRCTPTIM','DIVIAC'=>'DIVIAC','DIRILA'=>'DIRILA');
+        $this->destino_cargo = array(
+            'Todos'=>'Todos',
+            'Jefe direccion'=>'Jefe direccion',
+            'Jefe division'=>'Jefe division',
+            'Jefe sub unidad'=>'Jefe sub unidad',
+            'Jefe de area'=>'Jefe de area',
+            'Analista'=>'Analista',
+            'Investigador'=>'Investigador',
+            'Gente de inteligencia'=>'Gente de inteligencia',
+            'Estadistico'=>'Estadistico',
+            'Comunicacion e Imagen'=>'Comunicacion e Imagen',
+            'Operativo'=>'Operativo',
+            'Seguridad de Instalacion'=>'Seguridad de Instalacion',
+            'Administrativo'=>'Administrativo',
+            'Secretaria'=>'Secretaria',
+            'Seguridad de Instalaciones'=>'Seguridad de Instalaciones');
+        $this->a_estados = array('A'=>'Activo','D'=>'Desactivo');
+		
+		$this->set('a_destino_unidad',$this->a_destino_unidad);
+		$this->set('a_destino_cargo',$this->destino_cargo);
 		$this->set('a_estados',$this->a_estados);
+		//$this->set(compact('a_estados','a_destino_unidad'));
 		
 		$this->Auth->unauthorizedRedirect=FALSE ;
 		$this->Auth->authError=__('You are not authorized to access that location.');		

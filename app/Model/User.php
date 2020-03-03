@@ -12,7 +12,9 @@ class User extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'username';
+	public $displayField = 'grado';
+	//public $displayField = 'CONCAT(User.nombres, " ", User.app)';
+	var $virtualFields = array('usuario' => 'CONCAT(User.grado, " => ",User.nombres, " ", User.app)');
 
 /**
  * Validation rules
@@ -79,6 +81,23 @@ class User extends AppModel {
 			'order' => ''
 		)
 	);
+	
+	public $hasMany = array(
+	    'User' => array(
+	        'className' => 'Message',
+	        'foreignKey' => 'user_id',
+	        'dependent' => false,
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => '',
+	        'limit' => '',
+	        'offset' => '',
+	        'exclusive' => '',
+	        'finderQuery' => '',
+	        'counterQuery' => ''
+	    )
+	);
+	
     public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password(
               $this->data['User']['password']

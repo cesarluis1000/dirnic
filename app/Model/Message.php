@@ -7,6 +7,7 @@ App::uses('AppModel', 'Model');
  */
 class Message extends AppModel {
 
+    public $displayField = 'grado';
 /**
  * Validation rules
  *
@@ -23,6 +24,16 @@ class Message extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+	    'mensaje' => array(
+	        'notBlank' => array(
+	            'rule' => array('notBlank'),
+	            //'message' => 'Your custom message here',
+	            //'allowEmpty' => false,
+	            //'required' => false,
+	            //'last' => false, // Stop validation after this rule
+	            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+	        ),
+	    ),
 		'estado' => array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),

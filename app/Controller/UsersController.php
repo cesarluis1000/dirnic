@@ -104,11 +104,14 @@ class UsersController extends AppController {
 			$conditions = array('conditions' => array('User.'.$campo.' LIKE' => '%'.$nombre.'%'));
 			$this->Paginator->settings = array_merge($this->Paginator->settings,$conditions);
 		}
-		$this->set('users', $this->Paginator->paginate());
+		
+		$users = $this->Paginator->paginate();
+		$this->set('users', $users);
 	}
 	
 	public function index2() {
-        $Users = $this->User->find('all');
+	    $options = array('recursive' => -1);
+	    $Users = $this->User->find('all',$options);
         $Users = Set::extract($Users, '{n}.User');
         //pr($Personas);
         $this->set(array(
@@ -165,7 +168,10 @@ class UsersController extends AppController {
 	}
 
     public function view2($id) {
-        $User = $this->User->findById($id);
+        $options = array('conditions' => array('id' => $id),
+                         'recursive' => -1);
+        $User = $this->User->find('first',$options);
+        
         $User = Set::extract($User, 'User');
         $this->set(array(
             'User' => $User,

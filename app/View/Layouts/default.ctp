@@ -18,6 +18,8 @@
 		echo $this->Html->css('bootstrap-datetimepicker.css');
 		echo $this->Html->css('elmundotec.css');
 	?>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<?php echo $this->Html->script('jquery-3.2.1.min.js'); ?>	
 </head>
 <body>
 	<div id="container">
@@ -57,8 +59,6 @@
 		</div>
 		
 	</div>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<?php echo $this->Html->script('jquery-3.2.1.min.js'); ?>	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <?php echo $this->Html->script('bootstrap.min.js'); ?>
     <!-- Bootstrap datetimepicker Plugin -->

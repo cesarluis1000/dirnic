@@ -34,6 +34,15 @@ class MessagesController extends AppController {
 		$this->set('messages', $this->Paginator->paginate());
 	}
 
+	public function index2() {
+	    $options = array('recursive' => -1);
+	    $Messages = $this->Message->find('all',$options);
+	    $Messages = Set::extract($Messages, '{n}.Message');
+	    $this->set(array(
+	        'Messages' => $Messages,
+	        '_serialize' => array('Messages')
+	    ));
+	}
 /**
  * view method
  *
@@ -56,15 +65,22 @@ class MessagesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+		    //pr($this->request->data);
 			$this->Message->create();
 			if ($this->Message->save($this->request->data)) {
+			    //pr($this->Message->validationErrors); 
 				$this->Flash->success(__('The message has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Flash->error(__('The message could not be saved. Please, try again.'));
 			}
-		}
-		$users = $this->Message->User->find('list');
+		}	
+		
+		$users =  $this->Message->User->find("list", array(
+		    "fields" => array("id", "usuario"),
+		    "order" => array("User.id ASC"),
+		    "conditions" => array('User.estado' => 'A')
+		));
 		$this->set(compact('users'));
 	}
 

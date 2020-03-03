@@ -37,18 +37,12 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('mensaje'); ?></th>
 			<th><?php echo $this->Paginator->sort('grado'); ?></th>
 			<th><?php echo $this->Paginator->sort('unidad_policial'); ?></th>
 			<th><?php echo $this->Paginator->sort('cargo'); ?></th>
 			<th><?php echo $this->Paginator->sort('fecha'); ?></th>
-			<th><?php echo $this->Paginator->sort('imagen'); ?></th>
-			<th><?php echo $this->Paginator->sort('video'); ?></th>
-			<th><?php echo $this->Paginator->sort('estado'); ?></th>
-			<th><?php echo $this->Paginator->sort('creador'); ?></th>
-			<th><?php echo $this->Paginator->sort('creado'); ?></th>
-			<th><?php echo $this->Paginator->sort('modificador'); ?></th>
-			<th><?php echo $this->Paginator->sort('modificado'); ?></th>
+			<th><?php echo $this->Paginator->sort('destino_unidad'); ?></th>
+			<th><?php echo $this->Paginator->sort('destino_cargo'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	</thead>
@@ -59,18 +53,12 @@
 		<td>
 			<?php echo $this->Html->link($message['User']['username'], array('controller' => 'users', 'action' => 'view', $message['User']['id'])); ?>
 		</td>
-		<td><?php echo h($message['Message']['mensaje']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['grado']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['unidad_policial']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['cargo']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['fecha']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['imagen']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['video']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['estado']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['creador']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['creado']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['modificador']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['modificado']); ?>&nbsp;</td>
+		<td><?php echo h($message['Message']['destino_unidad']); ?>&nbsp;</td>
+		<td><?php echo h($message['Message']['destino_cargo']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-eye-open')), array('action' => 'view', $message['Message']['id']),array('class' => 'btn btn-info btn-xs','escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $message['Message']['id']),array('class' => 'btn btn-warning btn-xs','escape'=>false)); ?>
