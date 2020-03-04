@@ -113,7 +113,6 @@ class UsersController extends AppController {
 	    $options = array('recursive' => -1);
 	    $Users = $this->User->find('all',$options);
         $Users = Set::extract($Users, '{n}.User');
-        //pr($Personas);
         $this->set(array(
             'Users' => $Users,
             '_serialize' => array('Users')

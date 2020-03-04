@@ -35,9 +35,9 @@ class MessagesController extends AppController {
 	}
 
 	public function index2() {
-	    $options = array('recursive' => -1);
+	    $options = array('recursive' => 1);
 	    $Messages = $this->Message->find('all',$options);
-	    $Messages = Set::extract($Messages, '{n}.Message');
+	    //$Messages = Set::extract($Messages, '{n}.Message');	    
 	    $this->set(array(
 	        'Messages' => $Messages,
 	        '_serialize' => array('Messages')
