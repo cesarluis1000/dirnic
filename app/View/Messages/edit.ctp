@@ -8,7 +8,7 @@
 		echo $this->Form->input('grado',array('label'=>array('class'=>'control-label col-sm-2'),'readonly' => 'readonly'));
 		echo $this->Form->input('unidad_policial',array('label'=>array('class'=>'control-label col-sm-2'),'readonly' => 'readonly'));
 		echo $this->Form->input('cargo',array('label'=>array('class'=>'control-label col-sm-2'),'readonly' => 'readonly'));
-		echo $this->Form->input('fecha',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text','placeholder'=>'YYYY-MM-DD'));
+		echo $this->Form->input('fecha',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text','placeholder'=>'YYYY-MM-DD HH:mm:ss'));
 		echo $this->Form->input('destino_unidad',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_destino_unidad,'empty' => 'Seleccionar'));
 		echo $this->Form->input('destino_cargo',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_destino_cargo,'empty' => 'Seleccionar'));
 		echo $this->Form->input('mensaje',array('label'=>array('class'=>'control-label col-sm-2')));

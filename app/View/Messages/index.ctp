@@ -36,8 +36,8 @@
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('grado'); ?></th>
+			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('unidad_policial'); ?></th>
 			<th><?php echo $this->Paginator->sort('cargo'); ?></th>
 			<th><?php echo $this->Paginator->sort('fecha'); ?></th>
@@ -50,10 +50,10 @@
 	<?php foreach ($messages as $message): ?>
 	<tr>
 		<td><?php echo h($message['Message']['id']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($message['User']['username'], array('controller' => 'users', 'action' => 'view', $message['User']['id'])); ?>
-		</td>
 		<td><?php echo h($message['Message']['grado']); ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($message['User']['nombres'].' '.$message['User']['app'], array('controller' => 'users', 'action' => 'view', $message['User']['id'])); ?>
+		</td>
 		<td><?php echo h($message['Message']['unidad_policial']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['cargo']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['fecha']); ?>&nbsp;</td>

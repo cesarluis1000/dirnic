@@ -25,6 +25,8 @@ class MessagesController extends AppController {
 		//Si se busca campo displayField del modelo
 		$campo = !empty($this->Message->displayField)?$this->Message->displayField:'id';
 		$this->set('campo',$campo);
+		$conditions = array('order' => array('Message.fecha'=>'DESC'));
+		$this->Paginator->settings = array_merge($this->Paginator->settings,$conditions);
 		if (!empty($this->request->query[$campo])){	    
 		    $nombre = $this->request->query[$campo];
 			$this->request->data['Message'][$campo] = $nombre ;
@@ -35,7 +37,7 @@ class MessagesController extends AppController {
 	}
 
 	public function index2() {
-	    $options = array('recursive' => 1);
+	    $options = array('order' => array('fecha DESC'),'recursive' => 1);
 	    $Messages = $this->Message->find('all',$options);
 	    //$Messages = Set::extract($Messages, '{n}.Message');	    
 	    $this->set(array(
@@ -106,7 +108,12 @@ class MessagesController extends AppController {
 			$options = array('conditions' => array('Message.' . $this->Message->primaryKey => $id));
 			$this->request->data = $this->Message->find('first', $options);
 		}
-		$users = $this->Message->User->find('list');
+		
+		$users =  $this->Message->User->find("list", array(
+		    "fields" => array("id", "usuario"),
+		    "order" => array("User.id ASC"),
+		    "conditions" => array('User.estado' => 'A')
+		));
 		$this->set(compact('users'));
 	}
 

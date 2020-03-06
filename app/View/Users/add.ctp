@@ -19,10 +19,6 @@
 		echo $this->Form->input('password',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('group_id',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('estado',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_estados,'empty' => 'Seleccionar'));
-		echo $this->Form->input('creador',array('label'=>array('class'=>'control-label col-sm-2')));
-		echo $this->Form->input('creado',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text','placeholder'=>'YYYY-MM-DD HH:mm:ss'));
-		echo $this->Form->input('modificador',array('label'=>array('class'=>'control-label col-sm-2')));
-		echo $this->Form->input('modificado',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text','placeholder'=>'YYYY-MM-DD HH:mm:ss'));
 	?>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
