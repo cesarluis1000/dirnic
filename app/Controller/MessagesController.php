@@ -59,7 +59,19 @@ class MessagesController extends AppController {
 		$options = array('conditions' => array('Message.' . $this->Message->primaryKey => $id));
 		$this->set('message', $this->Message->find('first', $options));
 	}
-
+	
+	public function view2($id) {
+	    $options = array('conditions' => array('Message.id' => $id),
+	        'recursive' => 1);
+	    $Message = $this->Message->find('first',$options);
+	    
+	    $Message = Set::extract($Message, 'Message');
+	    $this->set(array(
+	        'Message' => $Message,
+	        '_serialize' => array('Message')
+	    ));
+	}
+	
 /**
  * add method
  *
@@ -85,7 +97,24 @@ class MessagesController extends AppController {
 		));
 		$this->set(compact('users'));
 	}
-
+	
+	public function add2() {	    
+	    if (!isset($this->request->data['fecha']) || empty($this->request->data['fecha'])){
+	        $this->request->data['fecha'] = date('Y-m-d H:i:s'); 
+	    }
+	    
+	    $this->Message->create();
+	    if ($this->Message->save($this->request->data)) {
+	        $message = 'Guardado';
+	    } else {
+	        $message = 'Error';
+	    }
+	    $this->set(array(
+	        'message' => $message,
+	        '_serialize' => array('message')
+	    ));
+	}
+	
 /**
  * edit method
  *
