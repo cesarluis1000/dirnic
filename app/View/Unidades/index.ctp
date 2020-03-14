@@ -46,7 +46,7 @@
 	<tr>
 		<td><?php echo h($unidad['Unidad']['id']); ?>&nbsp;</td>
 		<td><?php echo h($unidad['Unidad']['name']); ?>&nbsp;</td>
-		<td><?php echo h($unidad['Unidad']['estado']); ?>&nbsp;</td>
+		<td><?php echo h($a_estados[$unidad['Unidad']['estado']]); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-eye-open')), array('action' => 'view', $unidad['Unidad']['id']),array('class' => 'btn btn-info btn-xs','escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $unidad['Unidad']['id']),array('class' => 'btn btn-warning btn-xs','escape'=>false)); ?>
