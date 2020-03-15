@@ -5,9 +5,9 @@
 			<?php echo h($unidad['Unidad']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __('nombre'); ?></dt>
 		<dd>
-			<?php echo h($unidad['Unidad']['name']); ?>
+			<?php echo h($unidad['Unidad']['nombre']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Estado'); ?></dt>

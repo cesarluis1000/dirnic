@@ -36,7 +36,7 @@
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('nombre'); ?></th>
 			<th><?php echo $this->Paginator->sort('estado'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -45,7 +45,7 @@
 	<?php foreach ($unidades as $unidad): ?>
 	<tr>
 		<td><?php echo h($unidad['Unidad']['id']); ?>&nbsp;</td>
-		<td><?php echo h($unidad['Unidad']['name']); ?>&nbsp;</td>
+		<td><?php echo h($unidad['Unidad']['nombre']); ?>&nbsp;</td>
 		<td><?php echo h($a_estados[$unidad['Unidad']['estado']]); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-eye-open')), array('action' => 'view', $unidad['Unidad']['id']),array('class' => 'btn btn-info btn-xs','escape'=>false)); ?>

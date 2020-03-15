@@ -12,7 +12,7 @@ class Unidad extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'name';
+	public $displayField = 'nombre';
 
 /**
  * Validation rules

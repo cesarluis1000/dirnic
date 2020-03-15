@@ -35,7 +35,7 @@ class UnidadesController extends AppController {
 	}
 	
 	public function index2() {
-	    $options = array('fields' => array('id', 'name'),'order' => array('id DESC'),'recursive' => -1);
+	    $options = array('fields' => array('id', 'nombre'),'order' => array('nombre ASC'),'recursive' => -1);
 	    $Unidades = $this->Unidad->find('all',$options);
 	    //pr($Unidades); exit;
 	    $Unidades = Set::extract($Unidades, '{n}.Unidad');
