@@ -46,7 +46,7 @@ Router::connect('/', array('controller' => 'users', 'action' => 'login'));
         array( 'action' => 'edit2', 'method' => 'PUT', 'id' => true ),
         array( 'action' => 'delete2', 'method' => 'DELETE', 'id' => true ),
     ) );
-    Router::mapResources(array('messages', 'users', 'unidades'), array('prefix'=>'api'));
+    Router::mapResources(array('messages', 'users', 'unidades', 'cargos'), array('prefix'=>'api'));
 	Router::parseExtensions();
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
