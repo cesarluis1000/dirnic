@@ -41,8 +41,8 @@
 			<th><?php echo $this->Paginator->sort('unidad_policial'); ?></th>
 			<th><?php echo $this->Paginator->sort('cargo'); ?></th>
 			<th><?php echo $this->Paginator->sort('fecha'); ?></th>
-			<th><?php echo $this->Paginator->sort('destino_unidad'); ?></th>
-			<th><?php echo $this->Paginator->sort('destino_cargo'); ?></th>
+			<th><?php echo $this->Paginator->sort('unidad_id','Unidad Destino'); ?></th>
+			<th><?php echo $this->Paginator->sort('cargo_id','Cargo Destino'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	</thead>
@@ -57,8 +57,8 @@
 		<td><?php echo h($message['Message']['unidad_policial']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['cargo']); ?>&nbsp;</td>
 		<td><?php echo h($message['Message']['fecha']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['destino_unidad']); ?>&nbsp;</td>
-		<td><?php echo h($message['Message']['destino_cargo']); ?>&nbsp;</td>
+		<td><?php echo h($message['Unidad']['nombre']); ?>&nbsp;</td>
+		<td><?php echo h($message['Cargo']['nombre']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-eye-open')), array('action' => 'view', $message['Message']['id']),array('class' => 'btn btn-info btn-xs','escape'=>false)); ?>
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-edit')), array('action' => 'edit', $message['Message']['id']),array('class' => 'btn btn-warning btn-xs','escape'=>false)); ?>

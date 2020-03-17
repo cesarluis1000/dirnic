@@ -95,7 +95,9 @@ class MessagesController extends AppController {
 		    "order" => array("User.id ASC"),
 		    "conditions" => array('User.estado' => 'A')
 		));
-		$this->set(compact('users'));
+		$unidades = $this->Message->Unidad->find('list');
+		$cargos = $this->Message->Cargo->find('list');
+		$this->set(compact('users','unidades','cargos'));
 	}
 	
 	public function add2() {	    
@@ -136,6 +138,7 @@ class MessagesController extends AppController {
 		} else {
 			$options = array('conditions' => array('Message.' . $this->Message->primaryKey => $id));
 			$this->request->data = $this->Message->find('first', $options);
+			//pr($this->request->data);
 		}
 		
 		$users =  $this->Message->User->find("list", array(
@@ -143,7 +146,9 @@ class MessagesController extends AppController {
 		    "order" => array("User.id ASC"),
 		    "conditions" => array('User.estado' => 'A')
 		));
-		$this->set(compact('users'));
+		$unidades = $this->Message->Unidad->find('list');
+		$cargos = $this->Message->Cargo->find('list');
+		$this->set(compact('users','unidades','cargos'));
 	}
 
 /**

@@ -20,14 +20,14 @@
 			<?php echo h($message['Message']['grado']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Unidad Policial'); ?></dt>
+		<dt><?php echo __('Unidad Destino'); ?></dt>
 		<dd>
-			<?php echo h($message['Message']['unidad_policial']); ?>
+			<?php echo h($message['Unidad']['nombre']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Cargo'); ?></dt>
+		<dt><?php echo __('Cargo Destino'); ?></dt>
 		<dd>
-			<?php echo h($message['Message']['cargo']); ?>
+			<?php echo h($message['Cargo']['nombre']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Fecha'); ?></dt>

@@ -60,6 +60,20 @@ class Message extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+	    'Unidad' => array(
+	        'className' => 'Unidad',
+	        'foreignKey' => 'unidad_id',
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => ''
+	    ),
+	    'Cargo' => array(
+	        'className' => 'Cargo',
+	        'foreignKey' => 'cargo_id',
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => ''
+	    )
 	);
 }

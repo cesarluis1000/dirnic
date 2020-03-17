@@ -7,10 +7,10 @@
 		echo $this->Form->input('user_id',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('grado',array('label'=>array('class'=>'control-label col-sm-2'),'readonly' => 'readonly'));
 		echo $this->Form->input('unidad_policial',array('label'=>array('class'=>'control-label col-sm-2'),'readonly' => 'readonly'));
-		echo $this->Form->input('cargo',array('label'=>array('class'=>'control-label col-sm-2'),'readonly' => 'readonly'));
+		echo $this->Form->input('cargo',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text','readonly' => 'readonly'));
 		echo $this->Form->input('fecha',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text','placeholder'=>'YYYY-MM-DD HH:mm:ss'));
-		echo $this->Form->input('destino_unidad',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_destino_unidad,'empty' => 'Seleccionar'));
-		echo $this->Form->input('destino_cargo',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_destino_cargo,'empty' => 'Seleccionar'));
+		echo $this->Form->input('unidad_id',array('label'=>array('text'=>'Unidad Destino','class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
+		echo $this->Form->input('cargo_id',array('label'=>array('text'=>'Cargo Destino','class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
 		echo $this->Form->input('mensaje',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('imagen',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('video',array('label'=>array('class'=>'control-label col-sm-2')));
