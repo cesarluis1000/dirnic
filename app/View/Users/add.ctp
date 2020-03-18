@@ -8,12 +8,12 @@
 		echo $this->Form->input('apm',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('dni',array('label'=>array('class'=>'control-label col-sm-2'),'type'=>'text'));
 		echo $this->Form->input('cip',array('label'=>array('class'=>'control-label col-sm-2'),'type'=>'text'));
-		echo $this->Form->input('grado',array('label'=>array('class'=>'control-label col-sm-2'),'type'=>'text'));
-		echo $this->Form->input('unidad_policial',array('label'=>array('class'=>'control-label col-sm-2'),'type'=>'text'));
-		echo $this->Form->input('cargo',array('label'=>array('class'=>'control-label col-sm-2'),'type'=>'text'));
+		echo $this->Form->input('grado_id',array('label'=>array('class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
+		echo $this->Form->input('unidad_id',array('label'=>array('class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
+		echo $this->Form->input('cargo_id',array('label'=>array('class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
 		echo $this->Form->input('telefono',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('correo',array('label'=>array('class'=>'control-label col-sm-2')));
-		echo $this->Form->input('departamento',array('label'=>array('class'=>'control-label col-sm-2')));
+		echo $this->Form->input('departamento_id',array('label'=>array('class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
 		echo $this->Form->input('sexo',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('username',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('password',array('label'=>array('class'=>'control-label col-sm-2')));

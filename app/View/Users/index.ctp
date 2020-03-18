@@ -37,10 +37,11 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('group_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('grado'); ?></th>
+			<th><?php echo $this->Paginator->sort('grado_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('Usuario'); ?></th>
-			<th><?php echo $this->Paginator->sort('unidad_policial'); ?></th>
-			<th><?php echo $this->Paginator->sort('cargo'); ?></th>
+			<th><?php echo $this->Paginator->sort('unidad_id','Unidad'); ?></th>
+			<th><?php echo $this->Paginator->sort('cargo_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('departamento_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('username'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -52,10 +53,11 @@
 		<td>
 			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
 		</td>
-		<td><?php echo h($user['User']['grado']); ?>&nbsp;</td>
+		<td><?php echo h($user['Grado']['nombre']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['nombres'].' '.$user['User']['app']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['unidad_policial']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['cargo']); ?>&nbsp;</td>
+		<td><?php echo h($user['Unidad']['nombre']); ?>&nbsp;</td>
+		<td><?php echo h($user['Cargo']['nombre']); ?>&nbsp;</td>
+		<td><?php echo h($user['Departamento']['nombre']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-eye-open')), array('action' => 'view', $user['User']['id']),array('class' => 'btn btn-info btn-xs','escape'=>false)); ?>

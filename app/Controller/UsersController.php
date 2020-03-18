@@ -62,13 +62,14 @@ class UsersController extends AppController {
 	    $username = $this->request->data["username"];
 	    $password = AuthComponent::password($this->request->data["password"]);
 
+	    $this->User->unBindModel(array('hasMany'=>array('Message')));
 	    $options = array('conditions' => array('username' => $username),
-	                     'recursive' => -1);
+	                     'recursive' => 1);
 	    $User = $this->User->find('first',$options);
         
         if(!empty($User) && $User['User']['password'] == $password){
             $Rpta = 1;
-            $User = Set::extract($User, 'User');
+            //$User = Set::extract($User, 'User');
         }elseif(!empty($User)){
             $Rpta = -1; //'La contraseña es incorrecta';
             $User = Set::extract($User, 'User');
@@ -200,8 +201,13 @@ class UsersController extends AppController {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 			$this->request->data = $this->User->find('first', $options);
 		}
-		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$groups           = $this->User->Group->find('list');
+		$unidades         = $this->User->Unidad->find('list');
+		$cargos           = $this->User->Cargo->find('list');
+		$grados           = $this->User->Grado->find('list');
+		$departamentos    = $this->User->Departamento->find('list');
+		
+		$this->set(compact('groups','unidades','cargos','grados','departamentos'));
 	}
 
 /**

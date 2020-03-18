@@ -79,11 +79,39 @@ class User extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+	    'Unidad' => array(
+	        'className' => 'Unidad',
+	        'foreignKey' => 'unidad_id',
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => ''
+	    ),
+	    'Cargo' => array(
+	        'className' => 'Cargo',
+	        'foreignKey' => 'cargo_id',
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => ''
+	    ),
+	    'Grado' => array(
+	        'className' => 'Grado',
+	        'foreignKey' => 'grado_id',
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => ''
+	    ),
+	    'Departamento' => array(
+	        'className' => 'Departamento',
+	        'foreignKey' => 'departamento_id',
+	        'conditions' => '',
+	        'fields' => '',
+	        'order' => ''
+	    )
 	);
 	
 	public $hasMany = array(
-	    'User' => array(
+	    'Message' => array(
 	        'className' => 'Message',
 	        'foreignKey' => 'user_id',
 	        'dependent' => false,
