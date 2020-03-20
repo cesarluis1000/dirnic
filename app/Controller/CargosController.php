@@ -35,7 +35,24 @@ class CargosController extends AppController {
 	}
 	
 	public function index2() {
-	    $options = array('fields' => array('id', 'nombre'),'order' => array('id ASC'),'recursive' => -1);
+	    
+	    $conditions = array();
+	    if (!empty($this->request->query['modulo'])){
+	        $modulo = $this->request->query['modulo'];
+	        switch ($modulo){
+	            case "usuarioNuevoView" :
+	                $conditions = array("id !=" => "1");
+	                break;
+	            case "mensajeNuevoFragment" :
+	                break;
+	        }
+	    }
+	    
+	    $options = array('fields' => array('id', 'nombre'),
+	        'conditions'=> $conditions,
+	        'order' => array('id ASC'),
+	        'recursive' => -1);
+	    
 	    $Cargos = $this->Cargo->find('all',$options);	    
 	    $this->set(array(
 	        'Cargos' => $Cargos,
