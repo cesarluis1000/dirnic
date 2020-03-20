@@ -13,9 +13,8 @@ class User extends AppModel {
  * @var string
  */
 	public $displayField = 'grado';
-	//public $displayField = 'CONCAT(User.nombres, " ", User.app)';
-	var $virtualFields = array('usuario' => 'CONCAT(User.grado, " => ",User.nombres, " ", User.app)');
-
+	//var $virtualFields = array('usuario' => 'CONCAT(User.grado, " => ",User.nombres, " ", User.app)');
+	var $virtualFields = array('usuario' => 'CONCAT(User.nombres, " ", User.app)');
 /**
  * Validation rules
  *

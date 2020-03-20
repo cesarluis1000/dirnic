@@ -168,11 +168,12 @@ class UsersController extends AppController {
 	}
 
     public function view2($id) {
-        $options = array('conditions' => array('id' => $id),
-                         'recursive' => -1);
+        $this->User->unBindModel(array('hasMany'=>array('Message')));
+        $options = array('conditions' => array('User.id' => $id),
+                         'recursive' => 1);
         $User = $this->User->find('first',$options);
         
-        $User = Set::extract($User, 'User');
+        //$User = Set::extract($User, 'User');
         $this->set(array(
             'User' => $User,
             '_serialize' => array('User')

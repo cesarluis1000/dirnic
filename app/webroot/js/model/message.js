@@ -6,9 +6,9 @@ $("#MessageUserId").change(function(){
         url: base+"api/users/"+UserId+".json",
         dataType: "json",
         success: function (data) {             
-             $("#MessageGrado").val(data.User.grado);
-             $("#MessageUnidadPolicial").val(data.User.unidad_policial);
-             $("#MessageCargo").val(data.User.cargo);             
+             $("#MessageGrado").val(data.User.Grado.nombre);
+             $("#MessageUnidadPolicial").val(data.User.Unidad.nombre);
+             $("#MessageCargo").val(data.User.Cargo.nombre);             
         }
     })
 })
