@@ -37,9 +37,26 @@ class MessagesController extends AppController {
 	}
 
 	public function index2() {
-	    $options = array('order' => array('fecha DESC'),'recursive' => 1);
-	    $Messages = $this->Message->find('all',$options);
-	    //$Messages = Set::extract($Messages, '{n}.Message');	    
+	    
+	    $conditions = array();
+	    if (isset($this->request->query['userId']) && !empty($this->request->query['userId'])){
+	        $userId = $this->request->query['userId'];
+	        $this->Message->User->unBindModel(array('hasMany'=>array('Message')));
+	        $options = array('conditions' => array('User.id' => $userId),
+	                         'recursive' => 1);
+	        $User = $this->Message->User->find('first',$options);
+	        $unidadId = $User['Unidad']['id'];
+	        $cargoId = $User['Cargo']['id'];
+	        $conditions = array('Message.unidad_id' => array(1,$unidadId),
+	            'Message.cargo_id' => array(1,$cargoId)
+	        );
+	    }	    
+	    
+	    $options = array('conditions'=> $conditions,
+	                   'order' => array('fecha DESC'),
+	                   'recursive' => 1);
+	    
+	    $Messages = $this->Message->find('all',$options);	    
 	    $this->set(array(
 	        'Messages' => $Messages,
 	        '_serialize' => array('Messages')
