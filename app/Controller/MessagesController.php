@@ -27,7 +27,7 @@ class MessagesController extends AppController {
 		$this->set('campo',$campo);
 		$conditions = array('order' => array('Message.fecha'=>'DESC'));
 		$this->Paginator->settings = array_merge($this->Paginator->settings,$conditions);
-		pr($this->request->query);
+		//pr($this->request->query);
 		//pr($this->Paginator->settings);
 		$conditions = array();
 		if (!empty($this->request->query['Usuario']) && isset($this->request->query['Usuario'])){
@@ -50,7 +50,7 @@ class MessagesController extends AppController {
 		    $conditions = array_merge($conditions,array('Message.cargo_id' => $nombre3));
 		    $this->Paginator->settings = array_merge($this->Paginator->settings,array('conditions' => $conditions));
 		}
-		pr($this->Paginator->settings);
+		//pr($this->Paginator->settings);
 		$unidades = $this->Message->Unidad->find('list');
 		$cargos   = $this->Message->Cargo->find('list');
 		$messages = $this->Paginator->paginate();
