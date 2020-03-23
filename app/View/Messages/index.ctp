@@ -3,8 +3,10 @@
 <!-- Buscador -->
 <div class="row">
 	<div class="col-md-10">
-			<?php echo $this->Form->create('Message', array('type' => 'get','url' => 'index','class' => 'form-inline','inputDefaults'=>array('div' => array('class' => 'form-group'),'class'=>'form-control input-xs'))); ?>	
-			<?php echo $this->Form->input($campo,array('required' => false,'label'=>false)); ?>
+			<?php echo $this->Form->create('Message', array('type' => 'get','url' => 'index','class' => 'form-inline','inputDefaults'=>array('div' => array('class' => 'form-group'),'class'=>'form-control input-xs'))); ?>			
+			<?php echo $this->Form->input('unidad_id',array('label'=>array('text'=>'Unidad Destino','class'=>'control-label'),'empty' => 'Seleccionar')); ?>
+		    <?php echo $this->Form->input('cargo_id',array('label'=>array('text'=>'Cargo Destino','class'=>'control-label'),'empty' => 'Seleccionar')); ?>
+		    <?php echo $this->Form->input('Usuario',array('required' => false,'label'=>array('text'=>'Usuario','class'=>'control-label'))); ?>
 			<?php echo $this->Form->button('Buscar', array('type' => 'submit','class'=>'btn btn-primary btn-xs'));  ?>
 			<?php echo $this->Form->button('Limpiar', array('type' => 'reset','class'=>'btn btn-primary btn-xs'));  ?>		
 			<?php echo $this->Form->end(); ?>	

@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     public $components = array(
-        'Acl','RequestHandler',//'DebugKit.Toolbar',
+        'Acl','RequestHandler','DebugKit.Toolbar',
         'Auth' => array(
             'loginAction' => array(
                 'controller' => 'users',

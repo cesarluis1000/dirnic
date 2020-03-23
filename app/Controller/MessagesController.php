@@ -27,13 +27,34 @@ class MessagesController extends AppController {
 		$this->set('campo',$campo);
 		$conditions = array('order' => array('Message.fecha'=>'DESC'));
 		$this->Paginator->settings = array_merge($this->Paginator->settings,$conditions);
-		if (!empty($this->request->query[$campo])){	    
-		    $nombre = $this->request->query[$campo];
-			$this->request->data['Message'][$campo] = $nombre ;
-			$conditions = array('conditions' => array('Message.'.$campo.' LIKE' => '%'.$nombre.'%'));
-			$this->Paginator->settings = array_merge($this->Paginator->settings,$conditions);
+		pr($this->request->query);
+		//pr($this->Paginator->settings);
+		$conditions = array();
+		if (!empty($this->request->query['Usuario']) && isset($this->request->query['Usuario'])){
+		    $nombre = $this->request->query['Usuario'];
+		    $this->request->data['Message']['Usuario'] = $nombre ;
+		    $conditions = array('CONCAT(User.nombres, " ", User.app) LIKE' => '%'.$nombre.'%');
+		    $this->Paginator->settings = array_merge($this->Paginator->settings,array('conditions' => $conditions));
 		}
-		$this->set('messages', $this->Paginator->paginate());
+		//pr($this->Paginator->settings);
+		if (!empty($this->request->query['unidad_id']) && isset($this->request->query['unidad_id'])){
+		    $nombre2 = $this->request->query['unidad_id'];
+		    $this->request->data['Message']['unidad_id'] = $nombre2 ;
+		    $conditions = array_merge($conditions,array('Message.unidad_id' => $nombre2));
+		    $this->Paginator->settings = array_merge($this->Paginator->settings,array('conditions' => $conditions));
+		}
+		//pr($this->Paginator->settings);
+		if (!empty($this->request->query['cargo_id']) && isset($this->request->query['cargo_id'])){
+		    $nombre3 = $this->request->query['cargo_id'];
+		    $this->request->data['Message']['cargo_id'] = $nombre3 ;
+		    $conditions = array_merge($conditions,array('Message.cargo_id' => $nombre3));
+		    $this->Paginator->settings = array_merge($this->Paginator->settings,array('conditions' => $conditions));
+		}
+		pr($this->Paginator->settings);
+		$unidades = $this->Message->Unidad->find('list');
+		$cargos   = $this->Message->Cargo->find('list');
+		$messages = $this->Paginator->paginate();
+		$this->set(compact('messages','unidades','cargos'));
 	}
 
 	public function index2() {
