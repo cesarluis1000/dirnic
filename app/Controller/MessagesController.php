@@ -116,16 +116,49 @@ class MessagesController extends AppController {
  * @return void
  */
 	public function add() {
-		if ($this->request->is('post')) {
-		    //pr($this->request->data);
-			$this->Message->create();
-			if ($this->Message->save($this->request->data)) {
-			    //pr($this->Message->validationErrors); 
-				$this->Flash->success(__('The message has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The message could not be saved. Please, try again.'));
-			}
+	    //pr($this->request->data); exit;
+	    if ($this->request->is('post')) {
+	        
+	         try{
+                    
+                    if (!empty($this->request->data['Message']['file']['name'])){
+                        $filename = '';
+                        $uploadData = $this->request->data['Message']['file'];
+                        if ( $uploadData['size'] > 2048000 || $uploadData['error'] !== 0) {
+                            throw new Exception('La imagen excede el tamaño de 2 mb, intente nuevamente.');
+                        }
+                        
+                        if ( $uploadData['type'] != 'image/jpeg') {
+                            throw new Exception('La imagen  no es de tipo JPG, intente nuevamente.');
+                        }
+                        
+                        //$filename = basename($uploadData['name']);
+                        $uploadFolder = WWW_ROOT. 'img';
+                        $this->request->data['Message']['file']['name'] = time() .'_'. $this->request->data['Message']['file']['name'];
+                        $filename = $this->request->data['Message']['file']['name'];
+                        $uploadPath =  $uploadFolder . DS . $filename;
+                        if( !file_exists($uploadFolder) ){
+                            mkdir($uploadFolder);
+                        }
+                        if (!move_uploaded_file($uploadData['tmp_name'], $uploadPath)) {
+                            throw new Exception('No se pudo guardar la imagen.');
+                        }
+                        
+                        $this->request->data['Message']['imagen'] = $this->request->data['Message']['file']['name'];	                   
+                    }
+	               
+			        $this->Message->create();
+	                if ($this->Message->save($this->request->data)) {
+	                    $this->Flash->success(__('El mensaje fue guardado'));
+	                    return $this->redirect(array('action' => 'index'));
+	                } else {
+	                    throw new Exception('The message could not be saved. Please, try again.');
+	                }
+	                
+	            }catch(Exception $e){
+	                $this->Flash->error($e);
+	            }
+	        
 		}	
 		
 		$users =  $this->Message->User->find("list", array(
@@ -162,22 +195,61 @@ class MessagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function edit($id = null) { 
+	    //pr($this->request->data); exit;
 		if (!$this->Message->exists($id)) {
 			throw new NotFoundException(__('Invalid message'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Message->save($this->request->data)) {
-				$this->Flash->success(__('The message has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The message could not be saved. Please, try again.'));
-			}
+		    
+            try{                
+                
+                if (!empty($this->request->data['Message']['file']['name'])){
+                    $filename = '';
+                    $uploadData = $this->data['Message']['file'];
+                    if ( $uploadData['size'] > 2048000 || $uploadData['error'] !== 0) {
+                        throw new Exception('La imagen excede el tamaño de 2 mb, intente nuevamente.');
+                    }
+                    
+                    if ( $uploadData['type'] != 'image/jpeg') {
+                        throw new Exception('La imagen no es de tipo JPG, intente nuevamente.');
+                    }
+                    
+                    //$filename = basename($uploadData['name']);
+                    $uploadFolder = WWW_ROOT. 'img';                    
+                    $this->request->data['Message']['file']['name'] = time() .'_'. $this->request->data['Message']['file']['name'];
+                    $filename = $this->request->data['Message']['file']['name'];
+                    $uploadPath =  $uploadFolder . DS . $filename;
+                    if( !file_exists($uploadFolder) ){
+                        mkdir($uploadFolder);
+                    }
+                    if (!move_uploaded_file($uploadData['tmp_name'], $uploadPath)) {
+                        throw new Exception('No se pudo guardar la imagen.');
+                    }           
+                     
+                    $this->request->data['Message']['imagen'] = $this->request->data['Message']['file']['name'];                    
+                }                
+
+                if ($this->Message->save($this->request->data)) {
+        			$this->Flash->success(__('The message has been saved.'));
+        			return $this->redirect(array('action' => 'index'));
+        		} else {
+        		    throw new Exception('The message could not be saved. Please, try again.');
+        		}		            
+                
+            }catch(Exception $e){
+                $options = array('conditions' => array('Message.' . $this->Message->primaryKey => $id));
+                $this->request->data = $this->Message->find('first', $options);
+                $this->Flash->error($e);
+            }
+		    
 		} else {
 			$options = array('conditions' => array('Message.' . $this->Message->primaryKey => $id));
 			$this->request->data = $this->Message->find('first', $options);
-			//pr($this->request->data);
 		}
+		
+	    $random1 = substr(number_format(time() * rand(),0,'',''),0,10);
+	    $imagen  = $this->request->data['Message']['imagen'].'?n='.$random1;
 		
 		$users =  $this->Message->User->find("list", array(
 		    "fields" => array("id", "usuario"),
@@ -186,7 +258,7 @@ class MessagesController extends AppController {
 		));
 		$unidades = $this->Message->Unidad->find('list');
 		$cargos = $this->Message->Cargo->find('list');
-		$this->set(compact('users','unidades','cargos'));
+		$this->set(compact('imagen','users','unidades','cargos'));
 	}
 
 /**

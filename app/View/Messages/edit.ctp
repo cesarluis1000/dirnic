@@ -1,6 +1,6 @@
 <fieldset>
 	<legend><?php echo __('Editar Message'); ?></legend>
-	<?php echo $this->Form->create('Message', array('class' => 'form-horizontal',
+	<?php echo $this->Form->create('Message', array('class' => 'form-horizontal','type' => 'file',
 		'inputDefaults'=>array('div' => array('class' => 'form-group'),'between' => '<div class="col-sm-6">','after' => '</div>','class'=>'form-control input-xs','error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))))); ?>
 		<?php
 		echo $this->Form->input('id',array('label'=>array('class'=>'control-label col-sm-2')));
@@ -12,7 +12,21 @@
 		echo $this->Form->input('unidad_id',array('label'=>array('text'=>'Unidad Destino','class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
 		echo $this->Form->input('cargo_id',array('label'=>array('text'=>'Cargo Destino','class'=>'control-label col-sm-2'),'empty' => 'Seleccionar'));
 		echo $this->Form->input('mensaje',array('label'=>array('class'=>'control-label col-sm-2')));
-		echo $this->Form->input('imagen',array('label'=>array('class'=>'control-label col-sm-2')));
+		//echo $this->Form->input('imagen',array('label'=>array('class'=>'control-label col-sm-2')));
+		
+		echo $this->Form->input('file', array('type' => 'file','label'=>array('text'=>'Imagen', 'class'=>'control-label col-sm-2')));
+		?>
+		
+		<?php if (!empty($this->request->data['Message']['imagen'])) { ?>
+	  	<div class="form-group">
+    		<div class="col-sm-offset-2 col-sm-10">    		
+    			<?php $imagen_src = $this->webroot.'img/'.$imagen; ?>
+				<img src="<?php echo $imagen_src;?>" width="300">    			
+    		</div>
+    	</div>
+    	<?php } ?>
+
+	<?php 
 		echo $this->Form->input('video',array('label'=>array('class'=>'control-label col-sm-2')));
 		echo $this->Form->input('estado',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_estados,'empty' => 'Seleccionar'));
 	?>
