@@ -27,7 +27,7 @@
     	<?php } ?>
 
 	<?php 
-		echo $this->Form->input('video',array('label'=>array('class'=>'control-label col-sm-2')));
+		echo $this->Form->input('enlace',array('label'=>array('class'=>'control-label col-sm-2'),'type' => 'text'));
 		echo $this->Form->input('estado',array('label'=>array('class'=>'control-label col-sm-2'),'options'=> $a_estados,'empty' => 'Seleccionar'));
 	?>
 	<div class="form-group">
