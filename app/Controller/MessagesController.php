@@ -155,12 +155,12 @@ class MessagesController extends AppController {
                         $this->request->data['Message']['id']      = $messageId;
                         $this->request->data['Message']['imagen']  = $path;                        
                        
-                        $uploadFolder = WWW_ROOT. 'img';
-                        $uploadPath =  $uploadFolder . DS . $path;
-                        
-                        if( !file_exists($uploadFolder) ){
-                            mkdir($uploadFolder);
+                        //$uploadFolder = WWW_ROOT. 'img';
+                        if( !file_exists($this->uploadFolder) ){
+                            mkdir($this->uploadFolder);
                         }
+                        
+                        $uploadPath =  $this->uploadFolder . DS . $path;
                         if (!move_uploaded_file($uploadData['tmp_name'], $uploadPath)) {
                             throw new Exception('No se pudo guardar la imagen.');
                         }                        
@@ -218,9 +218,14 @@ class MessagesController extends AppController {
         	    }
         	    
         	    $this->request->data['id']      = $messageId;
-                $this->request->data['imagen']  = $path;
+                $this->request->data['imagen']  = $path;        	           	    
         	    
-        	    $finalPath = WWW_ROOT. "img" . DS . $path;
+        	    //$uploadFolder = WWW_ROOT. 'img';        	    
+        	    if( !file_exists($this->uploadFolder) ){
+        	        mkdir($this->uploadFolder);
+        	    }
+        	    
+        	    $finalPath = $this->uploadFolder . DS . $path;
         	    if(!file_put_contents( $finalPath, base64_decode($imagen) ) ){
         	        throw new Exception('Error de imagen');
         	    }    
@@ -269,15 +274,14 @@ class MessagesController extends AppController {
                     
                     if ( $uploadData['type'] != 'image/jpeg') {
                         throw new Exception('La imagen no es de tipo JPG, intente nuevamente.');
-                    }                            
+                    }
+                    
+                    if( !file_exists($this->uploadFolder) ){
+                        mkdir($this->uploadFolder);
+                    }                                                
                     
                     $path      = $id.".jpeg";
-                    $uploadFolder = WWW_ROOT. 'img'; 
-                    $uploadPath =  $uploadFolder . DS . $path;
-                    
-                    if( !file_exists($uploadFolder) ){
-                        mkdir($uploadFolder);
-                    }
+                    $uploadPath =  $this->uploadFolder . DS . $path;
                     if (!move_uploaded_file($uploadData['tmp_name'], $uploadPath)) {
                         throw new Exception('No se pudo guardar la imagen.');
                     }

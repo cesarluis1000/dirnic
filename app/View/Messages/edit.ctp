@@ -20,7 +20,7 @@
 		<?php if (!empty($this->request->data['Message']['imagen'])) { ?>
 	  	<div class="form-group">
     		<div class="col-sm-offset-2 col-sm-10">    		
-    			<?php $imagen_src = $this->webroot.'img/'.$imagen; ?>
+    			<?php $imagen_src = $this->webroot.$webFolder.$imagen; ?>
 				<img src="<?php echo $imagen_src;?>" width="300">    			
     		</div>
     	</div>

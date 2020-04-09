@@ -44,7 +44,7 @@ class AppController extends Controller {
             ),
 			//Ruta de logeo
             'loginRedirect' => array(
-                'controller' => 'users',
+                'controller' => 'messages',
                 'action' => 'index'
             ),
             'authorize' => array(
@@ -59,7 +59,9 @@ class AppController extends Controller {
     function beforeFilter(){
         $this->paginate = array('limit'=>20);
         $this->a_estados = array('A'=>'Activo','D'=>'Desactivo');
-		
+        $this->uploadFolder = WWW_ROOT. 'img'. DS .'mensaje';
+        $this->set('webFolder',"img/mensaje/");
+        
 		$this->set('a_destino_unidad',$this->a_destino_unidad);
 		$this->set('a_destino_cargo',$this->destino_cargo);
 		$this->set('a_estados',$this->a_estados);
