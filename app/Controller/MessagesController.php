@@ -141,8 +141,7 @@ class MessagesController extends AppController {
                         
                         if ( $uploadData['type'] != 'image/jpeg') {
                             throw new Exception('La imagen  no es de tipo JPG, intente nuevamente.');
-                        }
-                        
+                        }                        
                         
                         $messageId = $this->Message->getInsertID();
                         $path      = $messageId.".jpeg";
@@ -253,7 +252,7 @@ class MessagesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) { 
+	public function edit($id = null) {
 	    //pr($this->request->data); exit;
 		if (!$this->Message->exists($id)) {
 			throw new NotFoundException(__('Invalid message'));
@@ -284,6 +283,11 @@ class MessagesController extends AppController {
                     $uploadPath =  $this->uploadFolder . DS . $path;
                     if (!move_uploaded_file($uploadData['tmp_name'], $uploadPath)) {
                         throw new Exception('No se pudo guardar la imagen.');
+                    }
+                    
+                    $this->Message->id  = $id;
+                    if(!$this->Message->saveField('imagen', $path)){
+                        throw new Exception('Error de path');
                     }
                     
                 }                
