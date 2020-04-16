@@ -58,7 +58,7 @@ class MessagesController extends AppController {
 	}
 
 	public function index2() {
-	    
+	    	    	    
 	    $conditions = array();
 	    if (isset($this->request->query['userId']) && !empty($this->request->query['userId'])){
 	        $userId = $this->request->query['userId'];
@@ -71,16 +71,43 @@ class MessagesController extends AppController {
 	        $conditions = array('Message.unidad_id' => array(1,$unidadId),
 	            'Message.cargo_id' => array(1,$cargoId)
 	        );
-	    }	    
+	    }
+	    
+	    $offset = 0;
+	    if (isset($this->request->query['offset']) && !empty($this->request->query['offset'])){
+	        $offset = $this->request->query['offset'];
+	    }
+	    
+	    $limit = 10;
+	    if (isset($this->request->query['limit']) && !empty($this->request->query['limit'])){
+	        $limit = $this->request->query['limit'];
+	    }
 	    
 	    $options = array('conditions'=> $conditions,
-	                   'order' => array('fecha DESC'),
-	                   'recursive' => 1);
+	                    'order' => array('fecha DESC'),
+            	        'offset' => $offset,
+            	        'limit'=> $limit,
+	                    'recursive' => 1);
 	    
-	    $Messages = $this->Message->find('all',$options);	    
+	    $Messages  = $this->Message->find('all',$options);
+	    //pr($this->Message->getLastQuery());
+	    $optionsCount  = array('conditions'=> $conditions,
+                	        'order' => array('fecha DESC'),
+                	        'recursive' => 1);
+	    
+	    $count = $this->Message->find('count',$optionsCount);
+	    	    
+	    $offsetNext    = $offset + $limit;
+	    $next          = ($offset + $limit >= $count) ? null : Router::url('/', true).'api/messages.json?userId=9&offset='.$offsetNext.'&limit='.$limit;
+	    
+	    $offsetPrev    = $offset - $limit;
+	    $previous      = ($offsetPrev < 0) ? null : Router::url('/', true).'api/messages.json?userId=9&offset='.$offsetPrev.'&limit='.$limit;	    
+	    	    
+	    $this->set(compact('count', 'next', 'previous', 'Messages'));
+	    
 	    $this->set(array(
-	        'Messages' => $Messages,
-	        '_serialize' => array('Messages')
+	        //'Messagess' => $Messages,
+	        '_serialize' => array('count', 'next', 'previous', 'Messages')
 	    ));
 	}
 /**
