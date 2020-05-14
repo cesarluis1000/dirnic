@@ -194,6 +194,50 @@ class MessagesController extends AppController {
                     }
                     
                     $datasource->commit();
+                                        
+                    
+                    /*************Enviar Notificacion*********/
+                    
+                    $apiKey = 'AAAAwgxFzF0:APA91bHcirs1wkGmee8ehSvP4zcU5FIkSRGAFpTwZvn8dHvi_0XdcuRI_imrKFvGj1f7p8Qc947dId-QK34XFxtSxGrKYgGLS6_hd1MYLmI-DrksFlbjRn8FDKrOJe2kxoKslOiLoFp4';
+                    
+                    $users =  $this->Message->User->find("first", array(
+                        "fields" => array("id", "usuario"),
+                        "conditions" => array(  'User.id' => $this->data['Message']['user_id'],
+                            'User.estado' => 'A')
+                    ));
+                    
+                    $data = array(
+                        'titulo'    => $this->data['Message']['unidad_policial']." - ".$this->data['Message']['cargo']." ".$this->data['Message']['grado'].": ".$users['User']['usuario'],
+                        'detalle'   => $this->data['Message']['mensaje'],
+                        'unidadId'  => $this->data['Message']['unidad_id'],
+                        'cargoId'   => $this->data['Message']['cargo_id']
+                    );
+                    
+                    $fields = array(
+                        'to' => '/topics/dispositivos',
+                        'data' => $data,
+                    );
+                    
+                    $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
+                    
+                    $url = 'https://fcm.googleapis.com/fcm/send';
+                    
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+                    
+                    $result = curl_exec($ch);
+                    
+                    curl_close($ch);
+                    
+                    /****************************************/
+                    
+                    
                     $this->Flash->success(__('El mensaje fue guardado'));
                     return $this->redirect(array('action' => 'index'));
                     
@@ -321,6 +365,48 @@ class MessagesController extends AppController {
 
                 if ($this->Message->save($this->request->data)) {
                     $datasource->commit();
+                    
+                    /*************Enviar Notificacion*********/
+                    
+                    $apiKey = 'AAAAwgxFzF0:APA91bHcirs1wkGmee8ehSvP4zcU5FIkSRGAFpTwZvn8dHvi_0XdcuRI_imrKFvGj1f7p8Qc947dId-QK34XFxtSxGrKYgGLS6_hd1MYLmI-DrksFlbjRn8FDKrOJe2kxoKslOiLoFp4';
+                    
+                    $users =  $this->Message->User->find("first", array(
+                        "fields" => array("id", "usuario"),
+                        "conditions" => array(  'User.id' => $this->data['Message']['user_id'],
+                                                'User.estado' => 'A')
+                    ));
+                    
+                    $data = array(
+                        'titulo'    => $this->data['Message']['unidad_policial']." - ".$this->data['Message']['cargo']." ".$this->data['Message']['grado'].": ".$users['User']['usuario'],
+                        'detalle'   => $this->data['Message']['mensaje'],
+                        'unidadId'  => $this->data['Message']['unidad_id'],
+                        'cargoId'   => $this->data['Message']['cargo_id']
+                    );
+                    
+                    $fields = array(
+                        'to' => '/topics/dispositivos',
+                        'data' => $data,
+                    );
+                    
+                    $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
+                    
+                    $url = 'https://fcm.googleapis.com/fcm/send';
+                    
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+                    
+                    $result = curl_exec($ch);
+                    
+                    curl_close($ch);
+                    
+                    /****************************************/
+                    
         			$this->Flash->success(__('The message has been saved.'));
         			return $this->redirect(array('action' => 'index'));
         		} else {
